@@ -1,10 +1,10 @@
 @extends('components.layout')
 
-@section('title', 'Login')
+@section('title', 'Signup')
 
 @section('content')
 
-<h1>Login</h1>
+<h1>Signup</h1>
 
 <form action="{{ route('authenticate') }}" method="post">
     @if ($errors->any())
@@ -26,6 +26,10 @@
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Repeat password</label>
+        <input type="password" name="password2" class="form-control" id="exampleInputPassword2">
     </div>
     <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember" value="1">

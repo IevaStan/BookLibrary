@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -14,12 +16,31 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        $request->validate(
+        $data = $request->validate(
             [
                 'email' => 'required|email',
                 'password' => 'required',
             ]
         );
-        return redirect('/');
+        // dd($request->get('remember'));
+        if (Auth::attempt($data, 1)) {
+            $request->session()->regenerate();
+
+            return redirect(route('profile')); //vartotojo profilis
+
+        }
+
+        // return redirect('/');
+        return back()->withErrors(['email' => 'Invalid data provided']);
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        //TODO change to homepage url
+        return redirect('categories');
     }
 }

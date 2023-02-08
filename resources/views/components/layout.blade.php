@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">AppVigi</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,20 @@
                     <li class="nav-item">
                         <a href="{{ url('books') }}" class="nav-link" aria-current="page" href="#">Books</a>
                     </li>
+                </ul>
+                
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0 ">
+                @if(auth()->user())
+                <li class="nav-item">
+                    <a href="{{ route('profile') }}" class="nav-link" aria-current="page">{{ auth()->user()->name }} profile</a>
+                </li>@endif
+                <li class="nav-item">
+                    @if(auth()->user() === null)
+                    <a href="{{ route('login') }}" class="nav-link" aria-current="page">Login</a>
+                    @else
+                    <a href="{{ route('logout') }}" class="nav-link" aria-current="page">Logout</a>
+                    @endif
+                </li>
                 </ul>
             </div>
         </div>
