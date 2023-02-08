@@ -8,7 +8,7 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +112,6 @@ Route::any('books/edit/{id}', [BookController::class, 'edit'])->name('book.edit'
 Route::delete('books/delete/{id}', [BookController::class, 'delete'])->name('book.delete');
 Route::get('books/{id}', [BookController::class, 'show'])->whereNumber('id');
 
-
-
+Route::get('login', [AuthController::class, 'show'])->name('login');
+Route::post('login', [AuthController::class, 'authenticate'])->name('authenticate');
 
