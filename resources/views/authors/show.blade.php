@@ -11,7 +11,7 @@
     </div>
     <div class="card-body">
         <p class="card-text">ID: {{ $author->id }}.</p>
-        <p class="card-text">Birthday: {{ $author->birthdate }}.</p>
+        <p class="card-text">Birthday: {{ $author->birthdate->format('Y-m-d') }}.</p>
         <p class="card-text">Country Of Origin: {{ $author->country }}.</p>
     </div>
 </div>

@@ -42,7 +42,7 @@
     </div>
     <div class="col-md-6">
         <label class="form-label">Birthdate:</label>
-        <input type="date" name="birthdate" value="{{ old('birthdate', $author->birthdate) }}" class="form-control @error('birthdate') is-invalid @enderror" placeholder="Author's date of birth">
+        <input type="date" name="birthdate" value="{{ old('birthdate', $author->birthdate->format('Y-m-d')) }}" class="form-control @error('birthdate') is-invalid @enderror" placeholder="Author's date of birth">
         @error('birthdate')
         <div class="invalid-feedback">{{ $message }}</div><br>
         @enderror

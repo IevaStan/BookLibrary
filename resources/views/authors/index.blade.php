@@ -37,7 +37,7 @@
             <a href="{{ url('authors', ['id' => $author->id]) }}" class="list-group-item list-group-item-action">{{ $author->name }}</a>
         </td>
         <td>{{ $author->surname }}</td>
-        <td>{{ $author->birthdate}}</td>
+        <td>{{ $author->birthdate->format('Y-m-d')}}</td>
         <td>{{ $author->country }}</td>
         <td>
             <a href="{{ route('author.edit', ['id' => $author->id]) }}" class="btn btn-primary">Edit</a>

@@ -10,7 +10,7 @@ class Author extends Model
 {
     use HasFactory;
 
-    // protected $dates = ['birthdate'];
+    protected $dates = ['birthdate'];
 
     protected $fillable = [
         'name',
