@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -22,12 +23,12 @@ class AuthController extends Controller
                 'password' => 'required',
             ]
         );
-        // dd($request->get('remember'));
-        if (Auth::attempt($data, 1)) {
+
+        // if (Auth::attempt($data, 1)) 
+        if (Auth::attempt($data, $request->get('remember'))) {
             $request->session()->regenerate();
 
             return redirect(route('profile')); //vartotojo profilis
-
         }
 
         // return redirect('/');

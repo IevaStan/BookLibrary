@@ -23,19 +23,21 @@
                         <a href="{{ url('books') }}" class="nav-link" aria-current="page" href="#">Books</a>
                     </li>
                 </ul>
-                
+
                 <ul class="navbar-nav ms-auto mb-2 mb-md-0 ">
-                @if(auth()->user())
-                <li class="nav-item">
-                    <a href="{{ route('profile') }}" class="nav-link" aria-current="page">{{ auth()->user()->name }} profile</a>
-                </li>@endif
-                <li class="nav-item">
-                    @if(auth()->user() === null)
-                    <a href="{{ route('login') }}" class="nav-link" aria-current="page">Login</a>
-                    @else
-                    <a href="{{ route('logout') }}" class="nav-link" aria-current="page">Logout</a>
-                    @endif
-                </li>
+                    @auth
+                    {{--daro tą patį ka ir: @if(auth()->user())--}}
+                    <li class="nav-item">
+                        <a href="{{ route('profile') }}" class="nav-link" aria-current="page">{{ auth()->user()->name }} profile</a>
+                    </li> @endauth
+                    <li class="nav-item">
+                        @guest
+                        <a href="{{ route('login') }}" class="nav-link" aria-current="page">Login</a>
+                        @endguest
+                        @auth
+                        <a href="{{ route('logout') }}" class="nav-link" aria-current="page">Logout</a>
+                        @endauth
+                    </li>
                 </ul>
             </div>
         </div>

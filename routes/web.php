@@ -92,7 +92,7 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('categories/create', [CategoryController::class, 'create']);
 Route::post('categories/create', [CategoryController::class, 'store']);
 Route::any('categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-Route::delete('categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+Route::delete('categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete')->middleware('auth');
 Route::get('categories/{id}', [CategoryController::class, 'show']);
 
 Route::get('authors', [AuthorController::class, 'index']);
@@ -100,7 +100,7 @@ Route::get('authors/create', [AuthorController::class, 'create']);
 Route::post('authors/create', [AuthorController::class, 'store']);
 Route::any('authors/edit/{id}', [AuthorController::class, 'edit'])->name('author.edit');
 // Route::post('authors/edit/{id}', [AuthorController::class, 'update'])->name('author.edit');
-Route::delete('authors/delete/{id}', [AuthorController::class, 'delete'])->name('author.delete');
+Route::delete('authors/delete/{id}', [AuthorController::class, 'delete'])->name('author.delete')->middleware('auth');
 // Route::get('authors/{id}', [AuthorController::class, 'show']);
 Route::get('authors/{author}', [AuthorController::class, 'show']);
 
@@ -109,13 +109,13 @@ Route::get('books', [BookController::class, 'index']);
 Route::get('books/create', [BookController::class, 'create']);
 Route::post('books/store', [BookController::class, 'store']);
 Route::any('books/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
-Route::delete('books/delete/{id}', [BookController::class, 'delete'])->name('book.delete');
+Route::delete('books/delete/{id}', [BookController::class, 'delete'])->name('book.delete')->middleware('auth');
 Route::get('books/{id}', [BookController::class, 'show'])->whereNumber('id');
 
-Route::get('login', [AuthController::class, 'show'])->middleware(['guest'])->name('login');
-Route::post('login', [AuthController::class, 'authenticate'])->middleware(['guest'])->name('authenticate');
-Route::get('logout', [AuthController::class, 'logout'])->middleware(['auth'])->name('logout');
+Route::get('login', [AuthController::class, 'show'])->middleware('guest')->name('login');
+Route::post('login', [AuthController::class, 'authenticate'])->middleware('guest')->name('authenticate');
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
+Route::get('profile', [UserController::class, 'show'])->middleware(['auth', 'role'])->name('profile');
 
-Route::get('profile', [UserController::class, 'show'])->middleware(['auth'])->name('profile');
 

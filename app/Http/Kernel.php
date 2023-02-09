@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\RoleBased;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -13,6 +14,7 @@ class Kernel extends HttpKernel
      *
      * @var array<int, class-string|string>
      */
+    //veiks visada:
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
@@ -52,6 +54,7 @@ class Kernel extends HttpKernel
      *
      * @var array<string, class-string|string>
      */
+    //veiks tik prie tam tikrų nurodų
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
@@ -63,5 +66,19 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role' => RoleBased::class,
+
     ];
+
+    /**
+     * The application's route middleware.
+     * 
+     * These middleware may be assigned to groups or used individually.
+     * 
+     * @return array<string, class-string|string>
+     */
+    public function getRouteMiddleware()
+    {
+        return $this->routeMiddleware;
+    }
 }
