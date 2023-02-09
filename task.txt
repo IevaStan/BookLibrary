@@ -1,3 +1,37 @@
+1. Sukurti registracijos formą.+
+forma turi sudaryti laukai+
+ - email+
+- password+
+- name+
+- role => selectas tarp verciu: [Admin;Customer]+
+2. Sukurti route register su get methodu, kuris ir išrenderins šitą formą.+
+3. Sukurti route register su post methodu.
+4. Register metu turi būti patikrinta: 
+ email - būtinas ir email, https://laravel.com/docs/9.x/validation#rule-unique
+ name - būtinas ir neilgesnis negu 256 simboliu
+ password - https://laravel.com/docs/9.x/validation#validating-passwords
+ role - būtinas
+5. Jeigu neteisingi duomenys išveskite klaidos pranešimus.
+6. Jeigu viskas ok išsaugokite vartotoją ir nukreipkite į login formą
+7. Neužmirškite kaip reikia saugoti vartotojo slaptažodį: Hash::make();
+ 
+ 
+EXTRA: 
+Sukurti forma pakeisti slaptažodį:
+ 
+1.
+- forma turi savyje tureti laukus
+  - current password -> validuoti turi ar slaptazodis toks koks buvo pries tai suvestas
+  - new password -> turi validuoti ar slaptaozids 8 simboliu ilgio
+  - repeated new password -> turi validuoti ar slaptazodis sutampa su pries tai buvusiu slaptazodziu
+ 
+- sekmingai ivykus validacijai naujas slaptažodis turi būti pasaugotas ir vartotojas turi būti nukreipiamas į profile puslapį.
+ 
+2.
+- Sukurti nauja roleBasedMiddleware tik šį karta turi validuoti ar vartotojas yra Customer
+- Patobulinkite sprendimą naudodamies Middleware kintamaisiais: https://laravel.com/docs/9.x/middleware#middleware-parameters
+_________________________
+
 1. Pakurkite nauja controlleri AuthorController
  
 1.1. Pridekite methoda index+

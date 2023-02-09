@@ -38,6 +38,11 @@
                         <a href="{{ route('logout') }}" class="nav-link" aria-current="page">Logout</a>
                         @endauth
                     </li>
+                    <li class="nav-item">
+                        @guest
+                        <a href="{{ route('register') }}" class="nav-link" aria-current="page">Signup</a>
+                        @endguest
+                    </li>
                 </ul>
             </div>
         </div>

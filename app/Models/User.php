@@ -21,7 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'email_verified_at'
     ];
+    protected $dates = ['email_verified_at'];
 
     /**
      * The attributes that should be hidden for serialization.

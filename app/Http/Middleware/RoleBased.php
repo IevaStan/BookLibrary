@@ -29,6 +29,6 @@ class RoleBased
     }
     private function isAdmin(Request $request): bool
     {
-        return $request->user() && $request->user()->role === 'admin';
+        return $request->user() && $request->user()->role === 'Admin';
     }
 }
