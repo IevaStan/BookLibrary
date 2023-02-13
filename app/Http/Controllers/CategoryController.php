@@ -19,6 +19,9 @@ class CategoryController extends Controller
         // select * from categories
         $categories = Category::all();
 
+        //jei noriu atfiltruoti, pvz, tik ištrinta ssu softDelete:
+        //$categories = Category::onlyTrashed()->get();
+
         return view('categories/index', [
             'categories' => $categories
         ]);

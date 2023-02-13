@@ -32,7 +32,7 @@
 
     <div class="form-group">
         <label class="form-label">Author:</label>
-        <select name="author_id" class="form-control">
+        <select name="author_id[]" class="form-control" multiple>
             @foreach($authors as $author)
             <option value="{{ $author->id }}">{{ $author->full_name }}</option>
             @endforeach

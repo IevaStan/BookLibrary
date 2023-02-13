@@ -106,6 +106,7 @@ Route::get('authors/{author}', [AuthorController::class, 'show']);
 
 
 Route::get('books', [BookController::class, 'index']);
+Route::get('books/books-without-author', [BookController::class, 'indexWithoutAuthors']);
 Route::get('books/create', [BookController::class, 'create']);
 Route::post('books/store', [BookController::class, 'store']);
 Route::any('books/edit/{id}', [BookController::class, 'edit'])->name('book.edit');

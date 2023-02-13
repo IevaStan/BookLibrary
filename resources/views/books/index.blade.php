@@ -16,7 +16,7 @@
     <tr>
         <th scope="col" width="100">ID</th>
         <th scope="col">Title</th>
-        <th scope="col">Author</th>
+        <th scope="col">Author(s)</th>
         <th scope="col">Category</th>
         <th scope="col">Pages</th>
         <th scope="col">Description</th>
@@ -30,8 +30,12 @@
             <a href="{{ url('books', ['id' => $book->id]) }}" class="list-group-item list-group-item-action">{{ $book->name }}</a>
         </td>
         <td>
-            @if($book->author)
-            {{ $book->author->full_name }}
+            @if($book->authors)
+
+            @foreach($book->authors as $author)
+              {{ $author->full_name }} <br>
+            @endforeach
+
             @endif
         </td>
         <td>

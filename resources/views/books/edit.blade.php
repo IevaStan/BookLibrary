@@ -7,14 +7,14 @@
 <h1>Edit book "{{ $book->name }}"</h1>
 
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
 <form action="{{ route('book.edit', ['id' => $book->id]) }}" method="post" class="row g-3">
 
@@ -31,9 +31,9 @@
 
     <div class="form-group">
         <label class="form-label">Author:</label>
-        <select name="author_id" class="form-control">
+        <select name="author_id[]" class="form-control @error('author_id') is-invalid @enderror" multiple>
             @foreach($authors as $author)
-            <option value="{{ $author->id }}">{{ $author->full_name }}</option>
+            <option value="{{ $author->id }}" @if($book->authors->contains($author->id))selected @endif >{{ $author->full_name }}</option>
             @endforeach
         </select>
     </div>
