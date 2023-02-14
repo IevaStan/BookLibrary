@@ -25,7 +25,6 @@ class CategoryController extends Controller
         return view('categories/index', [
             'categories' => $categories
         ]);
-        
     }
 
     public function show(int $id): View
@@ -58,7 +57,15 @@ class CategoryController extends Controller
     //atsakinga uz atvaizdavima create formos
     public function create(): View|RedirectResponse
     {
-        return view('categories/create');
+
+        // SELECT * FROM categories WHERE category_id IS NULL
+        $categories = Category::where('category_id', null)->get();
+        //get'as naudojamas kuriant querius su where, join ir pan.
+        //get'as nereikalingas ant all, find
+
+        return view('categories/create', [
+            'categories' => $categories
+        ]);
     }
 
 
@@ -75,6 +82,7 @@ class CategoryController extends Controller
                 ['name' => 'required|min:3|max:20']
             );
 
+
             // $request->validated();
 
 
@@ -83,15 +91,19 @@ class CategoryController extends Controller
             $category->enabled = $request->post('enabled', false);
             $category->save();
 
+            $categories = Category::where('category_id', null)->get();
+
 
             // arba kitas metodas, vietoj 3 eiluciu tik viena:
             // $category->update($request->all());
             return redirect('categories')->with('success', 'Category updated successfully!');
         }
 
-        // dd($category);
+        $categories = Category::where('category_id', null)->get();
+        
         return view('categories/edit', [
-            'category' => $category
+            'category' => $category,
+            'categories' => $categories,
         ]);
     }
 

@@ -7,6 +7,7 @@
 <h1>Edit category "{{ $category->name }}"</h1>
 
 <form action="{{ route('category.edit', ['id' => $category->id]) }}" method="post" class="row g-3">
+    
 
     <!-- @if ($errors->any())
     <div class="alert alert-danger">
@@ -27,6 +28,17 @@
         @enderror
     </div>
 
+    <div class="form-group">
+        <label class="form-label">Parent category:</label>
+        <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
+            <option value="">--</option>
+            @foreach($categories as $cat)
+            <option value="{{ $cat->id }}" @if($cat->id === $category->category_id) selected @endif>{{ $cat->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+   
     <div class="form-group">
         <input type="checkbox" name="enabled" class="form-check-input" value="1" @if (old('enabled')) checked @endif>
         <label class="form-check-label">Enabled?</label>

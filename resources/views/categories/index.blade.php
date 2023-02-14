@@ -16,6 +16,7 @@
     <tr>
         <th scope="col" width="100">Title</th>
         <th scope="col">Name</th>
+        <th scope="col">Parent category</th>
         <th scope="col">Enabled</th>
         <th scope="col" width="100">Edit</th>
         <th scope="col" width="100">Delete</th>
@@ -25,6 +26,11 @@
         <th scope="row">{{ $category->id }}</th>
         <td class="list-group-flush" >
             <a href="{{ url('categories', ['id' => $category->id]) }}" class="list-group-item list-group-item-action">{{ $category->name }}</a>
+        </td>
+        <td>
+            @if($category->parentCategory)
+            {{ $category->parentCategory->name }}
+            @endif
         </td>
         <td>{{ $category->enabled }}</td>
         <td>

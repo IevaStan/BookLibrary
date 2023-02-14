@@ -18,7 +18,7 @@ class Book extends Model
         'category_id',
     ];
 
-    protected $with = ['category', 'authors'];
+    // protected $with = ['category', 'authors'];
 
     public function authors(): BelongsToMany   //pakeičiau į authors perėjus prie many
     {

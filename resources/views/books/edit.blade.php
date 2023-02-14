@@ -38,14 +38,18 @@
         </select>
     </div>
 
-
     <div class="form-group">
         <label class="form-label">Category:</label>
-        <select name="category_id" class="form-control">
+        <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
+            <option value="">-</option>
             @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option @if(old('category_id', isset($book->category->id) ? $book->category->id : null) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                    @foreach($category->childrenCategories as $childrenCategory)
+                    <option value="{{ $childrenCategory->id }}" @if($childrenCategory->id === $book->category->id) selected @endif>---{{ $childrenCategory->name }}</option>
+                    @endforeach
             @endforeach
         </select>
+        @error('category_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
     </div>
 
 

@@ -14,7 +14,7 @@ class BookController extends Controller
 {
     public function index(Request $request): View
     {
-        
+
         // $books = Book::with('category', 'authors')->paginate(10);
 
         $books = Book::paginate(10); //paginate suskaido puslapį po n knygų
@@ -50,7 +50,12 @@ class BookController extends Controller
     {
         $authors = Author::all();
         // $categories = Category::all();
-        $categories = Category::where('enabled', '=', 1)->get();  
+
+        $categories = Category::where('enabled', '=', 1)
+            ->whereNull('category_id')
+            ->with('childrenCategories')
+            ->get();
+
         return view('books/create', ['authors' => $authors, 'categories' => $categories]);
     }
 
@@ -61,7 +66,7 @@ class BookController extends Controller
                 'name' => 'required',
                 'page_count' => 'required',
                 'description' => 'required|min:5|max:30',
-                // 'author_id' => 'required',
+                'author_id' => 'required',
                 'category_id' => 'required',
             ]
         );
@@ -97,7 +102,13 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $authors = Author::all();
-        $categories = Category::all();
+
+        $categories = Category::where('enabled', '=', 1)
+        ->whereNull('category_id')
+        ->with('childrenCategories')
+        ->get();
+
+
         if ($book === null) {
             abort(404);
         }

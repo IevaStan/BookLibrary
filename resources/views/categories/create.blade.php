@@ -26,6 +26,18 @@
         <div class="invalid-feedback">{{ $message }}</div><br>
         @enderror
     </div>
+    
+
+    <div class="form-group">
+        <label class="form-label">Parent category:</label>
+        <select name="category_id" class="form-control">
+            <option value="">--</option>
+            @foreach($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
 
     <div class="form-group">
         <input type="checkbox" name="enabled" class="form-check-input" value="1" @if (old('enabled')) checked @endif>
