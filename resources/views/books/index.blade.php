@@ -16,6 +16,7 @@
     <tr>
         <th scope="col" width="100">ID</th>
         <th scope="col">Title</th>
+        <th scope="col">Image</th>
         <th scope="col">Author(s)</th>
         <th scope="col">Category</th>
         <th scope="col">Pages</th>
@@ -30,10 +31,15 @@
             <a href="{{ url('books', ['id' => $book->id]) }}" class="list-group-item list-group-item-action">{{ $book->name }}</a>
         </td>
         <td>
+            
+        <img src="{{ asset($book->image) }}" class="img-fluid">
+            
+        </td>
+        <td>
             @if($book->authors)
 
             @foreach($book->authors as $author)
-              {{ $author->full_name }} <br>
+            {{ $author->full_name }} <br>
             @endforeach
 
             @endif

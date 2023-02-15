@@ -71,6 +71,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('book_images') => storage_path('app/book_images')
+        //SYMLINK                       //STORAGE PATH
     ],
 
 ];

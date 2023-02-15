@@ -40,7 +40,7 @@
 
    
     <div class="form-group">
-        <input type="checkbox" name="enabled" class="form-check-input" value="1" @if (old('enabled')) checked @endif>
+        <input type="checkbox" name="enabled" class="form-check-input" value="1" @if (old('enabled', $category->enabled)) checked @endif>
         <label class="form-check-label">Enabled?</label>
     </div>
     <div class="col-12">

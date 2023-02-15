@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 
 
 class BookController extends Controller
@@ -61,6 +62,16 @@ class BookController extends Controller
 
     public function store(Request $request): RedirectResponse|View
     {
+        // 1. Papildyti formą mygtuku <input type - file +
+        // 2. Pakeisti formos tipą (enctype="multipart/form-data") +
+        // 3. Pasiziurėt requestą +
+        // 4. Patalpinti failą +
+        // 5. Prie knygos prisidėti lauką skirtą failo path: migraciją +
+        // 6. Galėsim pasaugoti book image value prie duomenų bazės +
+        // 7. Pabandysim nuotrauką atvaizduoti template, tam reikės naudoti symlink ir reikės assetus.
+
+
+
         $request->validate(
             [
                 'name' => 'required',
@@ -72,6 +83,16 @@ class BookController extends Controller
         );
 
         $book = Book::create($request->all());
+
+        $file = $request->file('image');
+        // $path = Storage::disk('public')->put('books_public', $file);
+        $path = $file->store('book_images'); // neamiršti įsidėti į linkus (config->filesystems)
+        // $file->store('books');
+        
+        $book->image = $path;
+        $book->save();
+
+
         $authors = Author::find($request->post('author_id'));
         $book->authors()->attach($authors);
 
@@ -104,10 +125,10 @@ class BookController extends Controller
         $authors = Author::all();
 
         $categories = Category::where('enabled', '=', 1)
-        ->whereNull('category_id')
-        ->with('childrenCategories')
-        ->get();
-
+            ->whereNull('category_id')
+            ->with('childrenCategories')
+            ->get();
+            
 
         if ($book === null) {
             abort(404);

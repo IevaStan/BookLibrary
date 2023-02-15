@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -20,4 +21,6 @@ class BookController extends Controller
     //     }
     //     return view('public/book/show', ['book' => $book]);
     // }
+
+
 }

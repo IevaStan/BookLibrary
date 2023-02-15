@@ -16,7 +16,7 @@
 </div>
 @endif
 
-<form action="{{ url('books/store') }}" method="post" class="row g-3">
+<form action="{{ url('books/store') }}" method="post" class="row g-3" enctype="multipart/form-data">
 
 
 
@@ -67,6 +67,17 @@
         <label class="form-label">Description:</label>
         <input type="text" name="description" value="{{ old('description') }}" class="form-control @error('description') is-invalid @enderror" placeholder="Book type: Paperback, Hardcover, E-book">
         @error('description')
+        <div class="invalid-feedback">{{ $message }}</div><br>
+        @enderror
+    </div>
+
+
+    <div class="form-group">
+        <label class="form-label">Add picture:</label>
+        <input type="file" name="image" class="form-control 
+        {{--@error('image') is-invalid @enderror--}}
+        ">
+        @error('image')
         <div class="invalid-feedback">{{ $message }}</div><br>
         @enderror
     </div>
