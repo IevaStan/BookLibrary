@@ -31,8 +31,6 @@ use App\Http\Controllers\Public\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('book/show/{id}', [PublicBookController::class, 'show']);
-
 
 /*Route::redirect('/', 'hello', 301);
 

@@ -16,8 +16,7 @@
 </div>
 @endif
 
-<form action="{{ route('book.edit', ['id' => $book->id]) }}" method="post" class="row g-3">
-
+<form action="{{ route('book.edit', ['id' => $book->id]) }}" method="post" class="row g-3" enctype="multipart/form-data">
 
     @csrf
     <div class="form-group">
@@ -44,9 +43,9 @@
             <option value="">-</option>
             @foreach($categories as $category)
             <option @if(old('category_id', $book->category ? $book->category->id : null) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
-                    @foreach($category->childrenCategories as $childrenCategory)
-                    <option value="{{ $childrenCategory->id }}" @if($book->category && $childrenCategory->id === $book->category->id) selected @endif>---{{ $childrenCategory->name }}</option>
-                    @endforeach
+            @foreach($category->childrenCategories as $childrenCategory)
+            <option value="{{ $childrenCategory->id }}" @if($book->category && $childrenCategory->id === $book->category->id) selected @endif>---{{ $childrenCategory->name }}</option>
+            @endforeach
             @endforeach
         </select>
         @error('category_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -70,23 +69,18 @@
         @enderror
     </div>
 
+    <div class="form-group">
+        <label class="form-label">Add picture:</label>
+        <input type="file" name="image" class="form-control 
+        {{--@error('image') is-invalid @enderror--}}
+        ">
+        @error('image')
+        <div class="invalid-feedback">{{ $message }}</div><br>
+        @enderror
+    </div>
 
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection
